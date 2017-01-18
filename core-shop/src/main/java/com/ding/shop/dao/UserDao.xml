@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ding.shop.dao.UserDao" >
+  <resultMap id="BaseResultMap" type="com.ding.shop.model.UserDo" >
+    <result column="uId" property="uId" jdbcType="VARCHAR" />
+    <result column="uName" property="uName" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="balance" property="balance" jdbcType="INTEGER" />
+    <result column="uRate" property="uRate" jdbcType="VARCHAR" />
+    <result column="isOn" property="isOn" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    uId, uName, password, phone, email, balance, uRate, isOn
+  </sql>
+  <insert id="insert" parameterType="com.ding.shop.model.UserDo" >
+    insert into shop_user (uId, uName, password, 
+      phone, email, balance, 
+      uRate, isOn)
+    values (#{uId,jdbcType=VARCHAR}, #{uName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{balance,jdbcType=INTEGER}, 
+      #{uRate,jdbcType=VARCHAR}, #{isOn,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ding.shop.model.UserDo" >
+    insert into shop_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uId != null" >
+        uId,
+      </if>
+      <if test="uName != null" >
+        uName,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="balance != null" >
+        balance,
+      </if>
+      <if test="uRate != null" >
+        uRate,
+      </if>
+      <if test="isOn != null" >
+        isOn,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uId != null" >
+        #{uId,jdbcType=VARCHAR},
+      </if>
+      <if test="uName != null" >
+        #{uName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null" >
+        #{balance,jdbcType=INTEGER},
+      </if>
+      <if test="uRate != null" >
+        #{uRate,jdbcType=VARCHAR},
+      </if>
+      <if test="isOn != null" >
+        #{isOn,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+</mapper>

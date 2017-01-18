@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ding.shop.dao.OrderDao" >
+  <resultMap id="BaseResultMap" type="com.ding.shop.model.OrderDo" >
+    <result column="oId" property="oId" jdbcType="VARCHAR" />
+    <result column="sId" property="sId" jdbcType="VARCHAR" />
+    <result column="uId" property="uId" jdbcType="VARCHAR" />
+    <result column="addr" property="addr" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="createDate" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="endDate" property="endDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    oId, sId, uId, addr, state, createDate, endDate
+  </sql>
+  <insert id="insert" parameterType="com.ding.shop.model.OrderDo" >
+    insert into shop_order (oId, sId, uId, 
+      addr, state, createDate, 
+      endDate)
+    values (#{oId,jdbcType=VARCHAR}, #{sId,jdbcType=VARCHAR}, #{uId,jdbcType=VARCHAR}, 
+      #{addr,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{endDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ding.shop.model.OrderDo" >
+    insert into shop_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="oId != null" >
+        oId,
+      </if>
+      <if test="sId != null" >
+        sId,
+      </if>
+      <if test="uId != null" >
+        uId,
+      </if>
+      <if test="addr != null" >
+        addr,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="createDate != null" >
+        createDate,
+      </if>
+      <if test="endDate != null" >
+        endDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="oId != null" >
+        #{oId,jdbcType=VARCHAR},
+      </if>
+      <if test="sId != null" >
+        #{sId,jdbcType=VARCHAR},
+      </if>
+      <if test="uId != null" >
+        #{uId,jdbcType=VARCHAR},
+      </if>
+      <if test="addr != null" >
+        #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null" >
+        #{endDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

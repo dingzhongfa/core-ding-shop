@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ding.shop.dao.ShopDao" >
+  <resultMap id="BaseResultMap" type="com.ding.shop.model.ShopDo" >
+    <result column="sId" property="sId" jdbcType="VARCHAR" />
+    <result column="uId" property="uId" jdbcType="VARCHAR" />
+    <result column="sName" property="sName" jdbcType="VARCHAR" />
+    <result column="sRate" property="sRate" jdbcType="INTEGER" />
+    <result column="satisfy" property="satisfy" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sId, uId, sName, sRate, satisfy
+  </sql>
+  <insert id="insert" parameterType="com.ding.shop.model.ShopDo" >
+    insert into shop_shop (sId, uId, sName, 
+      sRate, satisfy)
+    values (#{sId,jdbcType=VARCHAR}, #{uId,jdbcType=VARCHAR}, #{sName,jdbcType=VARCHAR}, 
+      #{sRate,jdbcType=INTEGER}, #{satisfy,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ding.shop.model.ShopDo" >
+    insert into shop_shop
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sId != null" >
+        sId,
+      </if>
+      <if test="uId != null" >
+        uId,
+      </if>
+      <if test="sName != null" >
+        sName,
+      </if>
+      <if test="sRate != null" >
+        sRate,
+      </if>
+      <if test="satisfy != null" >
+        satisfy,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sId != null" >
+        #{sId,jdbcType=VARCHAR},
+      </if>
+      <if test="uId != null" >
+        #{uId,jdbcType=VARCHAR},
+      </if>
+      <if test="sName != null" >
+        #{sName,jdbcType=VARCHAR},
+      </if>
+      <if test="sRate != null" >
+        #{sRate,jdbcType=INTEGER},
+      </if>
+      <if test="satisfy != null" >
+        #{satisfy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
