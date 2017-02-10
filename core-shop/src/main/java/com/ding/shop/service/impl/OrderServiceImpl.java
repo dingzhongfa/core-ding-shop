@@ -1,8 +1,9 @@
 package com.ding.shop.service.impl;
 
 import com.ding.shop.service.OrderService;
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 /**
  *
@@ -10,4 +11,6 @@ import org.springframework.stereotype.Service;
  */
 
 public class OrderServiceImpl implements OrderService {
+
+    private Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
 }

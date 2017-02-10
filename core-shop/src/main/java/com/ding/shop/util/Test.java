@@ -8,10 +8,11 @@ import com.github.pagehelper.PageHelper;
  */
 public class Test {
     public static void main(String[] args) {
-        String state = OrderStatus.ON.name();
-        System.out.println(state);
+//        String state = OrderStatus.ON.name();
+//        System.out.println(state);
 
-
+        System.out.println("当前线程数"+Thread.activeCount());
+        System.out.println(1<<4);
 
     }
 }

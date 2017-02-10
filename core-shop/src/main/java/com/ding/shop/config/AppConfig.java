@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.io.*;
@@ -20,7 +22,8 @@ import java.util.Properties;
 @Configuration
 @ComponentScan("com.ding.shop.service.impl")
 @MapperScan("com.ding.shop.dao")
-public class MybatisConf {
+@EnableTransactionManagement
+public class AppConfig {
 
     @Bean("dataSource")
     public DataSource getDataSource() throws Exception {
@@ -28,7 +31,7 @@ public class MybatisConf {
         Properties p = new Properties();
         InputStream inputStream = null;
         try {
-            confile = MybatisConf.class.getClassLoader().getResource("").getPath()
+            confile = AppConfig.class.getClassLoader().getResource("").getPath()
                     + confile;
             System.out.println(confile);
             File file = new File(confile);
@@ -58,6 +61,14 @@ public class MybatisConf {
 //       System.out.println(dataSource.getConnection().getCatalog());
 //        sqlSessionFactoryBean.setConfigLocation(new ClassPathResource("mybatis-config.xml"));
         return sqlSessionFactoryBean.getObject();
+    }
+
+
+    @Bean
+    public DataSourceTransactionManager dataSourceTransactionManager(@Autowired DataSource dataSource){
+        DataSourceTransactionManager dataSourceTransactionManager = new DataSourceTransactionManager();
+        dataSourceTransactionManager.setDataSource(dataSource);
+        return dataSourceTransactionManager;
     }
 
 }
