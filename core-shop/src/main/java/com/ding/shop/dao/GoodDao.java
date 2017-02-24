@@ -25,5 +25,5 @@ public interface GoodDao {
     int insertSelective(GoodDo record);
 
 
-
+    List<GoodDo> selectList(GoodDo goodDo);
 }

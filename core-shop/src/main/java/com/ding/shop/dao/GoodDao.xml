@@ -1,80 +1,122 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ding.shop.dao.GoodDao" >
-  <resultMap id="BaseResultMap" type="com.ding.shop.model.GoodDo" >
-    <result column="gId" property="gId" jdbcType="VARCHAR" />
-    <result column="gName" property="gName" jdbcType="VARCHAR" />
-    <result column="sId" property="sId" jdbcType="VARCHAR" />
-    <result column="price" property="price" jdbcType="INTEGER" />
-    <result column="category" property="category" jdbcType="VARCHAR" />
-    <result column="saleSvol" property="saleSvol" jdbcType="INTEGER" />
-    <result column="reserve" property="reserve" jdbcType="INTEGER" />
-    <result column="desc" property="desc" jdbcType="VARCHAR" />
-  </resultMap>
+<mapper namespace="com.ding.shop.dao.GoodDao">
+    <resultMap id="BaseResultMap" type="com.ding.shop.model.GoodDo">
+        <result column="gId" property="gId" jdbcType="VARCHAR"/>
+        <result column="gName" property="gName" jdbcType="VARCHAR"/>
+        <result column="sId" property="sId" jdbcType="VARCHAR"/>
+        <result column="price" property="price" jdbcType="INTEGER"/>
+        <result column="category" property="category" jdbcType="VARCHAR"/>
+        <result column="saleSvol" property="saleSvol" jdbcType="INTEGER"/>
+        <result column="reserve" property="reserve" jdbcType="INTEGER"/>
+        <result column="desc" property="desc" jdbcType="VARCHAR"/>
+    </resultMap>
 
 
-  <insert id="insert" parameterType="com.ding.shop.model.GoodDo" >
-    insert into shop_good (gId, gName, sId, 
-      price, category, saleSvol, 
-      reserve, `desc`)
-    values (#{gId,jdbcType=VARCHAR}, #{gName,jdbcType=VARCHAR}, #{sId,jdbcType=VARCHAR}, 
-      #{price,jdbcType=INTEGER}, #{category,jdbcType=VARCHAR}, #{saleSvol,jdbcType=INTEGER}, 
-      #{reserve,jdbcType=INTEGER}, #{desc,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.ding.shop.model.GoodDo" >
-    insert into shop_good
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="gId != null" >
+    <insert id="insert" parameterType="com.ding.shop.model.GoodDo">
+        insert into shop_good (gId, gName, sId,
+        price, category, saleSvol,
+        reserve, `desc`)
+        values (#{gId,jdbcType=VARCHAR}, #{gName,jdbcType=VARCHAR}, #{sId,jdbcType=VARCHAR},
+        #{price,jdbcType=INTEGER}, #{category,jdbcType=VARCHAR}, #{saleSvol,jdbcType=INTEGER},
+        #{reserve,jdbcType=INTEGER}, #{desc,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.ding.shop.model.GoodDo">
+        insert into shop_good
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="gId != null">
+                gId,
+            </if>
+            <if test="gName != null">
+                gName,
+            </if>
+            <if test="sId != null">
+                sId,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="category != null">
+                category,
+            </if>
+            <if test="saleSvol != null">
+                saleSvol,
+            </if>
+            <if test="reserve != null">
+                reserve,
+            </if>
+            <if test="desc != null">
+                `desc`,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="gId != null">
+                #{gId,jdbcType=VARCHAR},
+            </if>
+            <if test="gName != null">
+                #{gName,jdbcType=VARCHAR},
+            </if>
+            <if test="sId != null">
+                #{sId,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=INTEGER},
+            </if>
+            <if test="category != null">
+                #{category,jdbcType=VARCHAR},
+            </if>
+            <if test="saleSvol != null">
+                #{saleSvol,jdbcType=INTEGER},
+            </if>
+            <if test="reserve != null">
+                #{reserve,jdbcType=INTEGER},
+            </if>
+            <if test="desc != null">
+                #{desc,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <sql id="Base_Column_List">
         gId,
-      </if>
-      <if test="gName != null" >
         gName,
-      </if>
-      <if test="sId != null" >
         sId,
-      </if>
-      <if test="price != null" >
         price,
-      </if>
-      <if test="category != null" >
         category,
-      </if>
-      <if test="saleSvol != null" >
         saleSvol,
-      </if>
-      <if test="reserve != null" >
         reserve,
-      </if>
-      <if test="desc != null" >
-        desc,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="gId != null" >
-        #{gId,jdbcType=VARCHAR},
-      </if>
-      <if test="gName != null" >
-        #{gName,jdbcType=VARCHAR},
-      </if>
-      <if test="sId != null" >
-        #{sId,jdbcType=VARCHAR},
-      </if>
-      <if test="price != null" >
-        #{price,jdbcType=INTEGER},
-      </if>
-      <if test="category != null" >
-        #{category,jdbcType=VARCHAR},
-      </if>
-      <if test="saleSvol != null" >
-        #{saleSvol,jdbcType=INTEGER},
-      </if>
-      <if test="reserve != null" >
-        #{reserve,jdbcType=INTEGER},
-      </if>
-      <if test="desc != null" >
-        #{desc,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
+        `desc`
+
+    </sql>
+    <select id="selectList" parameterType="com.ding.shop.model.GoodDo" resultType="com.ding.shop.model.GoodDo">
+        select
+        <include refid="Base_Column_List"/>
+        from shop_good
+        <where>
+            <if test="gId != null">
+                and gid =#{gId,jdbcType=VARCHAR}
+            </if>
+            <if test="gName != null">
+                and gName= #{gName,jdbcType=VARCHAR}
+            </if>
+            <if test="sId != null">
+                and sId =#{sId,jdbcType=VARCHAR}
+            </if>
+            <if test="price != null">
+                and price =#{price,jdbcType=INTEGER}
+            </if>
+            <if test="category != null">
+                and category =#{category,jdbcType=VARCHAR}
+            </if>
+            <if test="saleSvol != null">
+                and saleSvol =#{saleSvol,jdbcType=INTEGER}
+            </if>
+            <if test="reserve != null">
+                and reserve =#{reserve,jdbcType=INTEGER}
+            </if>
+            <if test="desc != null">
+                and `desc` =#{desc,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
 </mapper>
